@@ -62,10 +62,10 @@ print(f"Вероятность: {y1_predict_prob} {y2_predict_prob} {y3_predict_
 
 
 # # Основной интерфейс Streamlit
-# st.title("Модель предсказания")
+st.title("Модель предсказания")
 
 # # Текстовое поле для многоканального ввода
-# text_input = st.text_area("Input Rate Name:")
+text_input = st.text_area("Input Rate Name:")
 
 # # Кнопка для запуска предсказания
 # if st.button("Предсказать"):
