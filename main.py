@@ -3,15 +3,15 @@ import numpy as np
 import joblib
 
 # Путь к файлам моделей и предобработчика
-MODEL_1 = 'xgb_classifier_y1.joblib'
-MODEL_2 = 'xgb_classifier_y2.joblib'
-MODEL_3 = 'xgb_classifier_y3_new.joblib'
+MODEL_1 = './models/xgb_classifier_y1.joblib'
+MODEL_2 = './models/xgb_classifier_y2.joblib'
+MODEL_3 = './models/xgb_classifier_y3_new.joblib'
 
-VECTORIZER = 'count_vectorizer_X.joblib'
+VECTORIZER = './prep/count_vectorizer_X.joblib'
 
-LABEL_ENCODER_1 = 'label_encoder_y1.joblib'
-LABEL_ENCODER_2 = 'label_encoder_y2.joblib'
-LABEL_ENCODER_3 = 'label_encoder_y3.joblib'
+LABEL_ENCODER_1 = './prep/label_encoder_y1.joblib'
+LABEL_ENCODER_2 = './prep/label_encoder_y2.joblib'
+LABEL_ENCODER_3 = './prep/label_encoder_y3.joblib'
 
 models = []
 vectorizers = []
