@@ -62,14 +62,14 @@ xgb_clf3 = models[2]
 
 
 # Основной интерфейс Streamlit
-st.title("Модель идентификации параметров отеля")
-st.caption("Введите текстовое описание отеля и мы автоматически определим некоторые параметры")
+st.title("Алгоритм опредления категории номера отеля")
+st.caption("Введите текстовое описание номера и мы автоматически определим его параметры")
 
-# Текстовое поле для многоканального ввода
+# Текстовое поле для многострочного ввода
 text_input = st.text_area("Input Rate Name:")
 
 # Кнопка для запуска предсказания
-if st.button("Предсказать"):
+if st.button("Определить"):
     # Преобразование текста при помощи предобработчика
     X_count = vectorizer.transform([text_input])
     
@@ -89,6 +89,12 @@ if st.button("Предсказать"):
     y3_decode = le_y3.inverse_transform(y3_predict)
     
     # Вывод результата
-    st.success(f"Предсказания (код): {y1_predict[0]} {y2_predict[0]} {y3_predict[0]}")
-    st.success(f"Предсказания (метка): {y1_decode[0]} {y2_decode[0]} {y3_decode[0]}")
-    st.success(f"Вероятность: {np.round(y1_predict_prob[0][y1_predict[0]]*100, 2)}%, {np.round(y2_predict_prob[0][y2_predict[0]]*100, 2)}%, {np.round(y3_predict_prob[0][y3_predict[0]]*100, 2)}%")
+    # st.success(f"Предсказания (код): {y1_predict[0]} {y2_predict[0]} {y3_predict[0]}")
+    st.success(f"Bedding: {y1_decode[0]}")
+    st.success(f"Capacity: {y2_decode[0]}")
+    st.success(f" View: {y3_decode[0]}")
+    st.markdown(f"""Точность предсказания
+    \nBedding: {np.round(y1_predict_prob[0][y1_predict[0]]*100, 2)}%
+    \nCapacity: {np.round(y2_predict_prob[0][y2_predict[0]]*100, 2)}%
+    \nView: {np.round(y3_predict_prob[0][y3_predict[0]]*100, 2)}%
+    """)
