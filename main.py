@@ -77,15 +77,17 @@ if st.button("Предсказать"):
     y2_predict = xgb_clf2.predict(X_count)
     y3_predict = xgb_clf3.predict(X_count)
 
+    # Вероятность предсказаний
+    y1_predict_prob = xgb_clf1.predict_proba(X_count)
+    y2_predict_prob = xgb_clf2.predict_proba(X_count)
+    y3_predict_prob = xgb_clf3.predict_proba(X_count)
+
     # Декодирование предсказаний
     y1_decode = le_y1.inverse_transform(y1_predict)
     y2_decode = le_y2.inverse_transform(y2_predict)
     y3_decode = le_y3.inverse_transform(y3_predict)
     
     # Вывод результата
-    st.success(f"Предсказания: {y1_predict} {y2_predict} {y3_predict}")
-    st.success(f"Предсказания: {y1_decode} {y2_decode} {y3_decode}")
-    
-#     # Вывод вероятностей
-#     # probabilities = model.predict_proba(processed_text)[0]
-#     # st.info(f"Вероятности: {dict(zip(categories, probabilities))}")
+    st.success(f"Предсказания (код): {y1_predict[0]} {y2_predict[0]} {y3_predict[0]}")
+    st.success(f"Предсказания (метка): {y1_decode[0]} {y2_decode[0]} {y3_decode[0]}")
+    st.success(f"Вероятность: {np.round(y1_predict_prob[0][y1_predict[0]]*100, 2)}%, {np.round(y2_predict_prob[0][y2_predict[0]]*100, 2)}%, {np.round(y3_predict_prob[0][y3_predict[0]]*100, 2)}%")
