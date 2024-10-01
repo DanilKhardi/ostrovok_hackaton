@@ -2,6 +2,7 @@ import streamlit as st
 import numpy as np
 import joblib
 
+
 # Путь к файлам моделей и предобработчика
 MODEL_1 = './models/xgb_classifier_y1.joblib'
 MODEL_2 = './models/xgb_classifier_y2.joblib'
@@ -41,47 +42,49 @@ xgb_clf1 = models[0]
 xgb_clf2 = models[1]
 xgb_clf3 = models[2]
 
-X_count = vectorizer.transform([input()])
+# X_count = vectorizer.transform([input()])
 
-y1_predict = xgb_clf1.predict(X_count)
-y2_predict = xgb_clf2.predict(X_count)
-y3_predict = xgb_clf3.predict(X_count)
+# y1_predict = xgb_clf1.predict(X_count)
+# y2_predict = xgb_clf2.predict(X_count)
+# y3_predict = xgb_clf3.predict(X_count)
 
-y1_predict_prob = xgb_clf1.predict_proba(X_count)
-y2_predict_prob = xgb_clf2.predict_proba(X_count)
-y3_predict_prob = xgb_clf3.predict_proba(X_count)
+# y1_predict_prob = xgb_clf1.predict_proba(X_count)
+# y2_predict_prob = xgb_clf2.predict_proba(X_count)
+# y3_predict_prob = xgb_clf3.predict_proba(X_count)
 
-y1_decode = le_y1.inverse_transform(y1_predict)
-y2_decode = le_y2.inverse_transform(y2_predict)
-y3_decode = le_y3.inverse_transform(y3_predict)
+# y1_decode = le_y1.inverse_transform(y1_predict)
+# y2_decode = le_y2.inverse_transform(y2_predict)
+# y3_decode = le_y3.inverse_transform(y3_predict)
 
-print(f"Предсказания: {y1_predict} {y2_predict} {y3_predict}")
-print(f"Предсказания: {y1_decode} {y2_decode} {y3_decode}")
-print(f"Вероятность: {y1_predict_prob} {y2_predict_prob} {y3_predict_prob}")
+# print(f"Предсказания: {y1_predict} {y2_predict} {y3_predict}")
+# print(f"Предсказания: {y1_decode} {y2_decode} {y3_decode}")
+# print(f"Вероятность: {y1_predict_prob} {y2_predict_prob} {y3_predict_prob}")
 
 
-
-# # Основной интерфейс Streamlit
+# Основной интерфейс Streamlit
 st.title("Модель предсказания")
 
-# # Текстовое поле для многоканального ввода
+# Текстовое поле для многоканального ввода
 text_input = st.text_area("Input Rate Name:")
 
-# # Кнопка для запуска предсказания
-# if st.button("Предсказать"):
-#     # Преобразование текста при помощи предобработчика
-#     X_count = vectorizer.transform([text_input])
+# Кнопка для запуска предсказания
+if st.button("Предсказать"):
+    # Преобразование текста при помощи предобработчика
+    X_count = vectorizer.transform([text_input])
     
-#     # Предсказание
-#     y1_predict = xgb_clf1.predict(X_count)
-#     y2_predict = xgb_clf2.predict(X_count)
-#     y3_predict = xgb_clf3.predict(X_count)
+    # Предсказание
+    y1_predict = xgb_clf1.predict(X_count)
+    y2_predict = xgb_clf2.predict(X_count)
+    y3_predict = xgb_clf3.predict(X_count)
+
+    # Декодирование предсказаний
+    y1_decode = le_y1.inverse_transform(y1_predict)
+    y2_decode = le_y2.inverse_transform(y2_predict)
+    y3_decode = le_y3.inverse_transform(y3_predict)
     
-#     # Получение категорий
-#     # categories = ["Категория 1", "Категория 2", "Категория 3"]  # Замените на ваши фактические категории
-    
-#     # Вывод результата
-#     st.success(f"Предсказания: {y1_predict} {y2_predict} {y3_predict}")
+    # Вывод результата
+    st.success(f"Предсказания: {y1_predict} {y2_predict} {y3_predict}")
+    st.success(f"Предсказания: {y1_decode} {y2_decode} {y3_decode}")
     
 #     # Вывод вероятностей
 #     # probabilities = model.predict_proba(processed_text)[0]
